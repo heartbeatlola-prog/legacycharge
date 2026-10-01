@@ -1,0 +1,2219 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Legacy Charge — Power Bank Rental on Campus</title>
+<meta name="description" content="Student-focused power-bank rentals from ₦500/hr. Real-time availability tracking, transparent hourly discounts up to 10 hours, and instant booking on WhatsApp.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+<script>
+  /* Entrance Choreography State */
+  document.documentElement.classList.add('intro');
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.documentElement.classList.remove('intro');
+    }, 4000);
+  });
+</script>
+
+<style>
+/* ==========================================================================
+   RESET & SYSTEM BASE
+   ========================================================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #020204;
+}
+
+body {
+  font-family: Poppins, Inter, system-ui, sans-serif;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   DESKTOP FIXED CANVAS (1172 x 657) & SCALING ARCHITECTURE
+   ========================================================================== */
+.stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #020204;
+}
+
+.stage-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(25, 127, 255, 0) 38%,
+      rgba(25, 127, 255, 0.042) 54%,
+      rgba(25, 127, 255, 0.052) 68%,
+      rgba(25, 127, 255, 0.030) 100%
+    ),
+    #020204;
+  z-index: 0;
+}
+
+/* Two-layer starfield */
+.stars-field-1, .stars-field-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.canvas {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1172px;
+  height: 657px;
+  transform: translateX(-50%) scale(var(--k, 1));
+  transform-origin: 50% 0;
+  will-change: transform;
+}
+
+.canvas > * {
+  position: absolute;
+}
+
+.stack {
+  position: absolute;
+  inset: 0;
+  z-index: 300;
+  pointer-events: none;
+}
+
+.stack > * {
+  position: absolute;
+  pointer-events: auto;
+}
+
+.navmenu {
+  display: contents;
+}
+
+.burger {
+  display: none;
+}
+
+/* ==========================================================================
+   NAVIGATION GEOMETRY & PILL DESIGN (z-index: 400)
+   Coordinates: left 247, top 3, width 678, height 64
+   ========================================================================== */
+.nav-container {
+  position: absolute;
+  left: 247px;
+  top: 3px;
+  width: 678px;
+  height: 64px;
+  border-radius: 32px;
+  background: rgba(10, 14, 24, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  z-index: 400;
+  pointer-events: auto;
+}
+
+.nav-mark {
+  position: absolute;
+  left: 21px;
+  top: 19px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-wordmark {
+  position: absolute;
+  left: 50px;
+  top: 0;
+  height: 64px;
+  user-select: none;
+}
+
+.nav-wordmark-kick {
+  position: absolute;
+  left: 3px;
+  top: 18px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #7b9bbd;
+  line-height: 1;
+}
+
+.nav-wordmark-name {
+  position: absolute;
+  left: 0;
+  top: 28px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.nav-wordmark-name span {
+  color: #00d2ff;
+}
+
+.nav-links {
+  position: absolute;
+  left: 156px;
+  top: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #8da4c4;
+  letter-spacing: 0.02em;
+  transition: color 0.18s ease;
+}
+
+.nav-link:hover, .nav-link:focus-visible {
+  color: #ffffff;
+}
+
+/* Glow Button Architecture */
+.glow-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  overflow: hidden;
+  background: linear-gradient(180deg, #1b3d6a 0%, #0d233e 55%, #081729 100%);
+  border: 1px solid rgba(0, 195, 255, 0.42);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 8px rgba(0, 160, 255, 0.35),
+    0 8px 24px rgba(0, 102, 255, 0.32);
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  cursor: pointer;
+}
+
+.glow-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0, 220, 255, 0.7);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 10px rgba(0, 195, 255, 0.5),
+    0 10px 28px rgba(0, 130, 255, 0.45);
+}
+
+.glow-btn:active {
+  transform: translateY(1px);
+}
+
+/* Masked Edge Light */
+.glow-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 100%, rgba(0, 210, 255, 0.32) 0%, transparent 72%);
+}
+
+/* Nav CTA Geometry: left 530.7, top 10.5, width 125.5, height 39.5 */
+.nav-cta {
+  position: absolute;
+  left: 530.7px;
+  top: 10.5px;
+  width: 125.5px;
+  height: 39.5px;
+  border-radius: 14px;
+  font-size: 11.5px;
+}
+
+/* Top hairline streak ONLY for Nav CTA */
+.nav-cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+  z-index: 2;
+}
+
+/* ==========================================================================
+   STATUS BADGE GEOMETRY (z-index: 300)
+   left 462, top 95, width 250, height 39, border-radius 12px
+   Strict internal positioning without flexbox centering
+   ========================================================================== */
+.status-badge {
+  position: absolute;
+  left: 462px;
+  top: 95px;
+  width: 250px;
+  height: 39px;
+  border-radius: 12px;
+  background: rgba(10, 17, 28, 0.82);
+  border: 1px solid rgba(0, 180, 255, 0.34);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 0 12px rgba(0, 150, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+.badge-icon {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 29px;
+  height: 29px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #092340 0%, #031120 100%);
+  border: 1px solid rgba(0, 210, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-text {
+  position: absolute;
+  left: 45px;
+  top: 0;
+  height: 39px;
+  line-height: 39px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: #79c5ff;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.badge-text span {
+  color: #d4af37;
+  margin-left: 4px;
+}
+
+/* ==========================================================================
+   HERO TYPOGRAPHY & HERO CTA
+   ========================================================================== */
+.hero-headline-wrap {
+  position: absolute;
+  left: 0;
+  top: 152px;
+  width: 1172px;
+  text-align: center;
+}
+
+.hero-headline {
+  font-size: 54px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.hero-headline .accent-line {
+  display: block;
+  background: linear-gradient(180deg, #ffffff 20%, #00d2ff 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-sub-wrap {
+  position: absolute;
+  left: 0;
+  top: 278px;
+  width: 1172px;
+  text-align: center;
+}
+
+.hero-sub {
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #93a9c7;
+}
+
+.hero-sub b {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.hero-sub .price-tag {
+  color: #00d2ff;
+  font-weight: 700;
+}
+
+/* Hero CTA Geometry: left 526, top 349, width 121, height 54.5 */
+.hero-cta {
+  position: absolute;
+  left: 526px;
+  top: 349px;
+  width: 121px;
+  height: 54.5px;
+  border-radius: 13px;
+  font-size: 13px;
+  /* Strictly NO ::before streak on Hero CTA */
+}
+
+/* ==========================================================================
+   PHYSICALLY BELIEVABLE POWER BANK HERO MOCKUP
+   ========================================================================== */
+.hero-mockup-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 422px;
+  width: 330px;
+  height: 136px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 280;
+}
+
+.powerbank-unit {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(140deg, #131720 0%, #090c13 55%, #05070a 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.85),
+    inset 0 1px 1px rgba(255, 255, 255, 0.22),
+    inset 0 0 20px rgba(0, 160, 255, 0.08),
+    0 0 40px rgba(0, 150, 255, 0.15);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pb-gold-trim {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  right: 30px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.8) 50%, transparent 100%);
+}
+
+.pb-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pb-brand {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #839bb8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pb-spec {
+  font-size: 9px;
+  font-weight: 600;
+  color: #d4af37;
+  letter-spacing: 0.06em;
+  background: rgba(212, 175, 55, 0.08);
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+}
+
+.pb-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 0;
+}
+
+.pb-leds {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pb-led {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00e5ff;
+  box-shadow: 0 0 8px #00e5ff, 0 0 16px rgba(0, 229, 255, 0.5);
+  animation: ledPulse 2.8s infinite ease-in-out;
+}
+
+.pb-led:nth-child(2) { animation-delay: 0.3s; }
+.pb-led:nth-child(3) { animation-delay: 0.6s; }
+.pb-led:nth-child(4) { animation-delay: 0.9s; }
+
+@keyframes ledPulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.12); box-shadow: 0 0 12px #00e5ff, 0 0 20px rgba(0, 229, 255, 0.8); }
+}
+
+.pb-display {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.pb-display-val {
+  font-size: 20px;
+  font-weight: 900;
+  color: #00e5ff;
+  line-height: 1;
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.7);
+}
+
+.pb-display-unit {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #6da2cb;
+}
+
+.pb-ports {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.pb-port {
+  width: 24px;
+  height: 8px;
+  background: #040507;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  position: relative;
+}
+
+.pb-port-gold {
+  position: absolute;
+  inset: 2px 4px;
+  background: #d4af37;
+  border-radius: 1px;
+  opacity: 0.8;
+}
+
+.pb-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 8px;
+  color: #556c86;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+/* ==========================================================================
+   SHOWCASE & 3D CYLINDER CAROUSEL (z-index: 5)
+   R = 891, plane y = 616, horizon = 918
+   ========================================================================== */
+.showcase {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1172px;
+  height: 0;
+  z-index: 5;
+}
+
+.ring-stage {
+  position: absolute;
+  left: 50%;
+  top: 616px;
+  width: 0;
+  height: 0;
+  perspective: 891px;
+  perspective-origin: 50% -302px; /* horizon 918 - 616 = 302px */
+}
+
+.ring-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 130px;
+  height: 300px;
+  margin-left: -65px;
+  margin-top: -150px;
+  border-radius: 18px;
+  background: linear-gradient(175deg, #101522 0%, #06080e 100%);
+  border: 1px solid rgba(0, 180, 255, 0.22);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backface-visibility: hidden;
+  will-change: transform, filter;
+  overflow: hidden;
+  user-select: none;
+}
+
+.ring-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: radial-gradient(circle at 50% 0%, rgba(0, 195, 255, 0.12) 0%, transparent 80%);
+  pointer-events: none;
+}
+
+.rc-tag {
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00d2ff;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rc-tag-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #00d2ff;
+  box-shadow: 0 0 6px #00d2ff;
+}
+
+.rc-tag.gold {
+  color: #d4af37;
+}
+
+.rc-tag.gold .rc-tag-dot {
+  background: #d4af37;
+  box-shadow: 0 0 6px #d4af37;
+}
+
+.rc-mockup-graphic {
+  width: 100%;
+  height: 120px;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rc-mockup-body {
+  width: 78px;
+  height: 110px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #181d29 0%, #0c0f17 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 8px 18px rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rc-bottom {
+  text-align: center;
+}
+
+.rc-price {
+  font-size: 15px;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.rc-price.gold-accent {
+  color: #d4af37;
+}
+
+.rc-duration {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #7e94ae;
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
+   BROWSER MOCKUP ARCHITECTURE (z-index: 100)
+   left 165, top 558, width 842, height calc(99px + var(--fill, 0px))
+   ========================================================================== */
+.browser {
+  position: absolute;
+  left: 165px;
+  top: 558px;
+  width: 842px;
+  height: calc(99px + var(--fill, 0px));
+  border-radius: 28px 28px 0 0;
+  background: #0d121c;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: none;
+  box-shadow: 0 -15px 45px rgba(0, 0, 0, 0.85);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.browser-chrome {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 42px;
+  background: #090d15;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  justify-content: space-between;
+}
+
+.browser-dots {
+  display: flex;
+  gap: 7px;
+}
+
+.browser-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.browser-dot.red { background: #ff5f56; }
+.browser-dot.yellow { background: #ffbd2e; }
+.browser-dot.green { background: #27c93f; }
+
+.browser-address-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #121824;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 4px 14px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #7b94b0;
+  width: 320px;
+  justify-content: center;
+}
+
+.browser-address-bar svg {
+  color: #00d2ff;
+}
+
+.browser-status-ping {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #27c93f;
+  letter-spacing: 0.04em;
+}
+
+.ping-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #27c93f;
+  box-shadow: 0 0 8px #27c93f;
+  animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.browser-page {
+  position: absolute;
+  left: 7px;
+  right: 6px;
+  top: 42px;
+  bottom: 0;
+  border-radius: 10px 10px 0 0;
+  background: #06090e;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 180, 255, 0.3) transparent;
+}
+
+.browser-page::-webkit-scrollbar {
+  width: 5px;
+}
+.browser-page::-webkit-scrollbar-thumb {
+  background: rgba(0, 180, 255, 0.3);
+  border-radius: 4px;
+}
+
+/* Dashboard Content Elements */
+.dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.dash-title-group h2 {
+  font-size: 19px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.dash-title-group p {
+  font-size: 12px;
+  color: #7b94b2;
+  margin-top: 3px;
+}
+
+.dash-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #00d2ff;
+  background: rgba(0, 210, 255, 0.08);
+  border: 1px solid rgba(0, 210, 255, 0.25);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* 3 Main Metric Counters */
+.dash-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.dash-metric-card {
+  background: rgba(14, 20, 32, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 14px 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dash-metric-card.avail {
+  border-color: rgba(0, 210, 255, 0.3);
+  background: linear-gradient(145deg, rgba(0, 210, 255, 0.07) 0%, rgba(14, 20, 32, 0.7) 100%);
+}
+
+.dash-metric-card.rented {
+  border-color: rgba(138, 92, 246, 0.25);
+}
+
+.dash-metric-card.soon {
+  border-color: rgba(212, 175, 55, 0.35);
+  background: linear-gradient(145deg, rgba(212, 175, 55, 0.08) 0%, rgba(14, 20, 32, 0.7) 100%);
+}
+
+.metric-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7f95af;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.metric-number {
+  font-size: 28px;
+  font-weight: 900;
+  color: #ffffff;
+  margin-top: 4px;
+  line-height: 1;
+}
+
+.metric-sub {
+  font-size: 11px;
+  color: #6882a0;
+  margin-top: 5px;
+}
+
+/* RENTAL SELECTOR SECTION */
+.dash-rental-sec {
+  background: #090e17;
+  border: 1px solid rgba(0, 180, 255, 0.25);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.rental-sec-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.rental-sec-header h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.rental-value-pill {
+  font-size: 11px;
+  font-weight: 700;
+  color: #d4af37;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+/* 10 Duration Option Pills (1h to 10h) */
+.duration-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.duration-btn {
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 6px;
+  text-align: center;
+  transition: all 0.18s ease;
+  position: relative;
+}
+
+.duration-btn:hover {
+  background: #182236;
+  border-color: rgba(0, 195, 255, 0.4);
+}
+
+.duration-btn.active {
+  background: linear-gradient(135deg, #09284d 0%, #061933 100%);
+  border-color: #00d2ff;
+  box-shadow: 0 0 14px rgba(0, 210, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.duration-btn .dur-hours {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.duration-btn .dur-price {
+  font-size: 11px;
+  font-weight: 700;
+  color: #00d2ff;
+  margin-top: 2px;
+}
+
+.duration-btn.active .dur-price {
+  color: #00ffff;
+}
+
+.dur-save-tag {
+  position: absolute;
+  top: -6px;
+  right: 4px;
+  background: #d4af37;
+  color: #000;
+  font-size: 8px;
+  font-weight: 900;
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+/* Calculation & WhatsApp Booking Row */
+.calc-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0d1422;
+  border-radius: 12px;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.calc-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.calc-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8da5c4;
+}
+
+.calc-price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.calc-price {
+  font-size: 24px;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.calc-original-price {
+  font-size: 14px;
+  color: #5d7594;
+  text-decoration: line-through;
+}
+
+.calc-savings-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #d4af37;
+  background: rgba(212, 175, 55, 0.12);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.booking-wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25d366;
+  color: #041209;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  letter-spacing: 0.03em;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.35);
+}
+
+.booking-wa-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(37, 211, 102, 0.5);
+}
+
+.booking-wa-btn svg {
+  fill: currentColor;
+}
+
+/* Fleet Lists Grid */
+.dash-fleet-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.fleet-col {
+  background: #090e17;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.fleet-col h4 {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8fa7c6;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fleet-col h4 span {
+  font-size: 11px;
+  font-weight: 700;
+  color: #00d2ff;
+}
+
+.fleet-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fleet-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #101624;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 9px;
+  padding: 8px 12px;
+}
+
+.fleet-item-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fleet-item-id {
+  font-size: 12px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.fleet-item-sub {
+  font-size: 10.5px;
+  color: #6a839f;
+}
+
+.fleet-item-status {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+
+.fleet-item-status.avail {
+  background: rgba(39, 201, 63, 0.12);
+  color: #27c93f;
+  border: 1px solid rgba(39, 201, 63, 0.3);
+}
+
+.fleet-item-status.rented {
+  background: rgba(138, 92, 246, 0.12);
+  color: #a78bfa;
+  border: 1px solid rgba(138, 92, 246, 0.3);
+}
+
+.fleet-item-status.soon {
+  background: rgba(212, 175, 55, 0.12);
+  color: #d4af37;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  animation: pulseSoon 2s infinite ease-in-out;
+}
+
+@keyframes pulseSoon {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; border-color: rgba(212, 175, 55, 0.6); }
+}
+
+.dash-props-strip {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: rgba(0, 210, 255, 0.04);
+  border: 1px dashed rgba(0, 210, 255, 0.2);
+  border-radius: 10px;
+  font-size: 11.5px;
+  color: #82a0c4;
+}
+
+.dash-props-strip span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dash-props-strip b {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   FLOATING WHATSAPP BUTTON (OUTSIDE CANVAS)
+   ========================================================================== */
+.wa-float-btn {
+  position: fixed;
+  right: 16px;
+  bottom: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+  z-index: 999;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: waPulse 3s infinite ease-in-out;
+}
+
+.wa-float-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6);
+}
+
+.wa-float-btn svg {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+}
+
+@keyframes waPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 10px 32px rgba(37, 211, 102, 0.65); }
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS (TABLET & PHONE)
+   ========================================================================== */
+
+/* TABLET MODE (701px to 1080px) */
+@media (min-width: 701px) and (max-width: 1080px) {
+  .nav-container {
+    left: 286px;
+    width: 620px;
+  }
+  .nav-links {
+    left: 140px;
+    gap: 16px;
+  }
+  .nav-cta {
+    left: 480px;
+    width: 120px;
+  }
+  .status-badge {
+    left: 448px;
+    width: 277px;
+  }
+}
+
+/* PHONE MODE (<= 700px) */
+@media (max-width: 700px) {
+  html, body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+  }
+
+  .stage {
+    position: relative !important;
+    inset: auto !important;
+    overflow: visible !important;
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+
+  .canvas {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+  }
+
+  .canvas > * {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+  }
+
+  .stack {
+    position: relative !important;
+    inset: auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100% !important;
+    z-index: 300;
+  }
+
+  .stack > * {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+  }
+
+  .nav-container {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 480px;
+    height: 58px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    margin-bottom: 24px;
+  }
+
+  .nav-mark {
+    position: static;
+  }
+  
+  .nav-wordmark {
+    position: static;
+    height: auto;
+    margin-left: 10px;
+    flex-grow: 1;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-cta {
+    position: static;
+    width: auto;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 10px;
+  }
+
+  .burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin-left: 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+
+  .mobile-menu-drawer {
+    display: none;
+    width: 100%;
+    background: #0d1422;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 16px;
+    margin-top: 8px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mobile-menu-drawer.open {
+    display: flex;
+  }
+
+  .mobile-menu-drawer a {
+    font-size: 14px;
+    color: #92a4bd;
+    padding: 6px 0;
+  }
+
+  .status-badge {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: auto !important;
+    max-width: 290px;
+    margin-bottom: 20px;
+  }
+
+  .hero-headline-wrap {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    margin-bottom: 14px;
+  }
+
+  /* 3 Balanced Lines on Phone */
+  .hero-headline {
+    font-size: 32px !important;
+    line-height: 1.15;
+  }
+
+  .hero-headline .phone-break {
+    display: block;
+  }
+
+  .hero-sub-wrap {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    margin-bottom: 24px;
+    padding: 0 8px;
+  }
+
+  .hero-sub {
+    font-size: 13.5px !important;
+  }
+
+  .hero-cta {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 280px;
+    height: 52px;
+    margin: 0 auto 30px auto;
+  }
+
+  .hero-mockup-wrapper {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 320px;
+    margin: 0 auto 36px auto;
+  }
+
+  .showcase {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    height: 180px !important;
+    overflow: hidden !important;
+    margin-bottom: 30px;
+  }
+
+  .ring-stage {
+    top: 90px !important;
+    perspective: 500px !important;
+    perspective-origin: 50% 0 !important;
+  }
+
+  .browser {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 20px;
+    margin-bottom: 40px;
+  }
+
+  .browser-page {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    padding: 16px;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .dash-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .duration-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calc-summary-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .calc-price-wrap {
+    justify-content: center;
+  }
+
+  .booking-wa-btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .dash-fleet-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dash-props-strip {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* Accessible Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ring-card {
+    will-change: auto;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="stage" id="stageRoot">
+  <!-- Dynamic Atmospheric Background & Starfield -->
+  <div class="stage-bg"></div>
+  <div class="stars-field-1" id="stars1"></div>
+  <div class="stars-field-2" id="stars2"></div>
+
+  <!-- FIXED DESIGN CANVAS (1172 x 657) -->
+  <div class="canvas" id="canvasRoot">
+
+    <!-- NAVIGATION LAYER (z-index: 400) -->
+    <header class="nav-container" role="banner">
+      <a href="#" class="nav-mark" aria-label="Legacy Charge Home">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="#00D2FF" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.6"/>
+          <path d="M13.5 3L7 13H12L10.5 21L17 11H12L13.5 3Z" fill="url(#boltGrad)" stroke="#00D2FF" stroke-width="0.5"/>
+          <defs>
+            <linearGradient id="boltGrad" x1="7" y1="3" x2="17" y2="21" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00FFFF"/>
+              <stop offset="0.6" stop-color="#0088FF"/>
+              <stop offset="1" stop-color="#D4AF37"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </a>
+
+      <div class="nav-wordmark">
+        <span class="nav-wordmark-kick">STUDENT POWER</span>
+        <span class="nav-wordmark-name">LEGACY<span>CHARGE</span></span>
+      </div>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#how" class="nav-link">How it works</a>
+        <a href="#availability" class="nav-link">Availability</a>
+        <a href="#prices" class="nav-link">Prices</a>
+        <a href="#support" class="nav-link">Support</a>
+      </nav>
+
+      <a href="https://wa.me/2347079358543?text=Hi%20Legacy%20Charge%2C%20I%20want%20to%20rent%20a%20power%20bank.%20Please%20let%20me%20know%20what%20is%20available." 
+         class="glow-btn nav-cta" target="_blank" rel="noopener noreferrer">
+        BOOK NOW
+      </a>
+
+      <button class="burger" id="burgerToggle" aria-expanded="false" aria-controls="mobileDrawer" aria-label="Toggle Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-menu-drawer" id="mobileDrawer">
+      <a href="#how" class="mob-link">How it works</a>
+      <a href="#availability" class="mob-link">Live Availability</a>
+      <a href="#prices" class="mob-link">Pricing & Discounts</a>
+      <a href="#support" class="mob-link">Hostel Support</a>
+      <a href="https://wa.me/2347079358543?text=Hi%20Legacy%20Charge%2C%20I%20have%20an%20urgent%20rental%20question." target="_blank" rel="noopener noreferrer" style="color:#00d2ff;font-weight:700;">WhatsApp Direct Chat</a>
+    </div>
+
+    <!-- STACK: STATUS BADGE, HERO COPY, HERO CTA (z-index: 300) -->
+    <div class="stack">
+      <!-- Status Badge: fixed pixel geometry, label clear of icon tile -->
+      <aside class="status-badge" aria-label="Service Positioning">
+        <div class="badge-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00D2FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <div class="badge-text">
+          STUDENT POWER <span>• ON DEMAND</span>
+        </div>
+      </aside>
+
+      <!-- Headline -->
+      <div class="hero-headline-wrap">
+        <h1 class="hero-headline">
+          Never Run Out <span class="phone-break">of Power</span>
+          <span class="accent-line">Again.</span>
+        </h1>
+      </div>
+
+      <!-- Supporting Copy -->
+      <div class="hero-sub-wrap">
+        <p class="hero-sub">
+          Rent a power bank by the hour / <span class="price-tag">from ₦500</span><br>
+          <b>Check availability, choose your time, and book directly on WhatsApp.</b>
+        </p>
+      </div>
+
+      <!-- Primary Hero CTA (Glow Button Architecture without top streak) -->
+      <a href="https://wa.me/2347079358543?text=Hi%20Legacy%20Charge%2C%20I%20want%20to%20rent%20a%20power%20bank.%20Please%20confirm%20availability." 
+         class="glow-btn hero-cta" target="_blank" rel="noopener noreferrer">
+        RENT NOW
+      </a>
+
+      <!-- Power Bank Hero Mockup Physical Object -->
+      <div class="hero-mockup-wrapper" aria-hidden="true">
+        <div class="powerbank-unit">
+          <div class="pb-gold-trim"></div>
+          <div class="pb-header">
+            <div class="pb-brand">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="#00e5ff">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+              LEGACY CHARGE
+            </div>
+            <div class="pb-spec">20,000mAh • 65W PD</div>
+          </div>
+
+          <div class="pb-center">
+            <div class="pb-leds">
+              <div class="pb-led"></div>
+              <div class="pb-led"></div>
+              <div class="pb-led"></div>
+              <div class="pb-led"></div>
+            </div>
+            <div class="pb-display">
+              <span class="pb-display-val">98</span>
+              <span class="pb-display-unit">%</span>
+            </div>
+            <div class="pb-ports">
+              <div class="pb-port"><div class="pb-port-gold"></div></div>
+              <div class="pb-port"></div>
+            </div>
+          </div>
+
+          <div class="pb-footer">
+            <span>FAST CHARGE PROTOCOL</span>
+            <span>BUILT FOR HOSTEL LIFE</span>
+          </div>
+        </div>
+      </div>
+    </div><!-- End .stack -->
+
+    <!-- SHOWCASE / 3D CYLINDER CAROUSEL (z-index: 5) -->
+    <div class="showcase">
+      <div class="ring-stage" id="ringStage">
+        <!-- 37 Cards populated via JavaScript with ~10 variants -->
+      </div>
+    </div>
+
+    <!-- BROWSER MOCKUP ARCHITECTURE (z-index: 100) -->
+    <section class="browser" aria-label="Legacy Charge Interactive Dashboard">
+      <div class="browser-chrome">
+        <div class="browser-dots">
+          <span class="browser-dot red"></span>
+          <span class="browser-dot yellow"></span>
+          <span class="browser-dot green"></span>
+        </div>
+
+        <div class="browser-address-bar">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span>legacycharge.ng/rental-hub</span>
+        </div>
+
+        <div class="browser-status-ping">
+          <span class="ping-indicator"></span>
+          Live Availability
+        </div>
+      </div>
+
+      <!-- Scrollable Browser Content Page -->
+      <div class="browser-page" id="browserPage">
+        <!-- Dashboard Header -->
+        <div class="dash-header" id="availability">
+          <div class="dash-title-group">
+            <h2>Campus Power Fleet</h2>
+            <p>Real-time hostel and study center inventory.</p>
+          </div>
+          <div class="dash-live-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#00d2ff">
+              <circle cx="12" cy="12" r="10"/>
+            </svg>
+            Live Hub Sync
+          </div>
+        </div>
+
+        <!-- 3 Metric Counter Cards -->
+        <div class="dash-metrics-grid">
+          <div class="dash-metric-card avail">
+            <div class="metric-label">
+              <span>AVAILABLE NOW</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="metric-number" id="metricAvail">8</div>
+            <div class="metric-sub">Fully charged & ready for pickup</div>
+          </div>
+
+          <div class="dash-metric-card rented">
+            <div class="metric-label">
+              <span>CURRENTLY RENTED</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="metric-number" id="metricRented">4</div>
+            <div class="metric-sub">Active student sessions</div>
+          </div>
+
+          <div class="dash-metric-card soon">
+            <div class="metric-label">
+              <span>RETURNING SOON</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <div class="metric-number" id="metricSoon">2</div>
+            <div class="metric-sub">Under 30 mins remaining</div>
+          </div>
+        </div>
+
+        <!-- RENTAL DURATION SELECTOR & WHATSAPP DYNAMIC BOOKING -->
+        <div class="dash-rental-sec" id="prices">
+          <div class="rental-sec-header">
+            <h3>Rent a Power Bank</h3>
+            <span class="rental-value-pill">⚡ Longer Rentals Receive Better Value</span>
+          </div>
+
+          <div class="duration-grid" id="durationGrid">
+            <!-- 10 Interactive Options: 1h to 10h -->
+          </div>
+
+          <div class="calc-summary-row">
+            <div class="calc-details">
+              <span class="calc-title" id="calcSummaryLabel">Selected: 5 Hours Rental Package</span>
+              <div class="calc-price-wrap">
+                <span class="calc-price" id="calcPriceDisplay">₦2,000</span>
+                <span class="calc-original-price" id="calcOrigDisplay">₦2,500</span>
+                <span class="calc-savings-badge" id="calcSavingsBadge">Save ₦500 (₦400/hr)</span>
+              </div>
+            </div>
+
+            <a href="#" class="booking-wa-btn" id="dynamicWaBtn" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+              </svg>
+              <span>BOOK ON WHATSAPP</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- FLEET STATUS LISTS (AVAILABLE & ACTIVE/RETURNING) -->
+        <div class="dash-fleet-grid" id="how">
+          <!-- Available List -->
+          <div class="fleet-col">
+            <h4>Available Units <span id="availHeaderCount">4 Online</span></h4>
+            <div class="fleet-items-list" id="availableFleetList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Active & Returning Soon List -->
+          <div class="fleet-col">
+            <h4>In Circulation / Returning <span id="circHeaderCount">6 Active</span></h4>
+            <div class="fleet-items-list" id="circulatingFleetList">
+              <!-- Dynamic live countdowns -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Student Promise Footer -->
+        <div class="dash-props-strip" id="support">
+          <span>⚡ <b>No store queues:</b> Reserve power before leaving your hostel.</span>
+          <span>🎓 <b>Student Friendly:</b> ₦500/hr base rate, discounts up to 10 hours.</span>
+          <span>🔌 <b>Built-in:</b> Type-C, Lightning & Micro-USB cables attached.</span>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- End .canvas -->
+</div><!-- End .stage -->
+
+<!-- FLOATING WHATSAPP BUTTON (OUTSIDE CANVAS) -->
+<a href="https://wa.me/2347079358543?text=Hi%20Legacy%20Charge%2C%20I%20want%20to%20rent%20a%20power%20bank.%20Please%20confirm%20availability." 
+   class="wa-float-btn" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   aria-label="Book a power bank on WhatsApp">
+  <svg viewBox="0 0 24 24">
+    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+  </svg>
+</a>
+
+<!-- ==========================================================================
+     CORE LOGIC: STARFIELD, 3D RING, RESPONSIVE FITTER, PRICING, COUNTDOWN
+     ========================================================================== */ -->
+<script>
+(function() {
+  'use strict';
+
+  /* --------------------------------------------------------------------------
+     1. STARFIELD GENERATOR (JS Box Shadows - 150 sharp, 18 blurred)
+     -------------------------------------------------------------------------- */
+  function generateStarfield() {
+    const s1 = document.getElementById('stars1');
+    const s2 = document.getElementById('stars2');
+    if (!s1 || !s2) return;
+
+    const shadow1 = [];
+    for (let i = 0; i < 150; i++) {
+      const x = Math.floor(Math.random() * window.innerWidth);
+      const y = Math.floor(Math.random() * window.innerHeight);
+      const alpha = (0.05 + Math.random() * 0.25).toFixed(2);
+      shadow1.push(`${x}px ${y}px rgba(255, 255, 255, ${alpha})`);
+    }
+    s1.style.boxShadow = shadow1.join(', ');
+
+    const shadow2 = [];
+    for (let i = 0; i < 18; i++) {
+      const x = Math.floor(Math.random() * window.innerWidth);
+      const y = Math.floor(Math.random() * window.innerHeight);
+      const alpha = (0.35 + Math.random() * 0.35).toFixed(2);
+      shadow2.push(`${x}px ${y}px 1.2px rgba(0, 210, 255, ${alpha})`);
+    }
+    s2.style.boxShadow = shadow2.join(', ');
+  }
+
+  /* --------------------------------------------------------------------------
+     2. RESPONSIVE SCALE LAW ENGINE
+     Desktop: min(vw/1172, vh/560)
+     Tablet: Smooth interpolation with tboost and fill variables
+     Phone: Flow layout
+     -------------------------------------------------------------------------- */
+  const canvasRoot = document.getElementById('canvasRoot');
+
+  function updateScale() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    if (vw <= 700) {
+      canvasRoot.style.removeProperty('--k');
+      canvasRoot.style.removeProperty('--fill');
+      canvasRoot.style.removeProperty('--tboost');
+      canvasRoot.style.removeProperty('--st');
+      return;
+    }
+
+    if (vw > 1080) {
+      const k = Math.min(vw / 1172, vh / 560);
+      const fill = Math.max(0, vh / k - 657);
+      canvasRoot.style.setProperty('--k', k.toFixed(5));
+      canvasRoot.style.setProperty('--fill', fill.toFixed(1) + 'px');
+      canvasRoot.style.removeProperty('--tboost');
+      canvasRoot.style.removeProperty('--st');
+    } else {
+      let W = 920 + (vw - 701) * (1172 - 920) / (1080 - 701);
+      if (vh > vw) {
+        W = Math.max(W, 900); // Tablet Portrait
+      }
+      const k = Math.min(vw / W, vh / 560);
+      const ramp = Math.min(1, (1080 - vw) / 120);
+      const tboost = 1 + 0.14 * ramp;
+      let fill = Math.max(0, vh / k - 657);
+
+      const ss = Math.min(fill * 0.55, 420) * ramp;
+      const rs = 1 + Math.min(fill / 1100, 0.75) * ramp;
+      const slack = 219.5 - 125 * rs + ss;
+      const st = Math.max(0, slack / 2 - 28) * ramp;
+      fill -= ss;
+
+      canvasRoot.style.setProperty('--k', k.toFixed(5));
+      canvasRoot.style.setProperty('--fill', fill.toFixed(1) + 'px');
+      canvasRoot.style.setProperty('--tboost', tboost.toFixed(3));
+      canvasRoot.style.setProperty('--st', st.toFixed(1) + 'px');
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     3. 3D CAROUSEL CYLINDER ENGINE (R=891, 37 cards, speed 1.9°/s, cull 42°)
+     -------------------------------------------------------------------------- */
+  const ringStage = document.getElementById('ringStage');
+  const R = 891;
+  const TOTAL_CARDS = 37;
+  const STEP = 360 / TOTAL_CARDS;
+  const CULL_ANGLE = 42;
+  const ROT_SPEED = 1.9; // deg/sec
+  let phase = -2;
+  let lastTime = performance.now();
+  let prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const cardVariants = [
+    { tag: '500 / HOUR', isGold: false, price: '₦500', dur: '1 Hour Rental', badge: 'FAST CHARGE' },
+    { tag: '2 HOURS', isGold: false, price: '₦1,000', dur: 'Hostel Favorite', badge: 'DUAL PORT' },
+    { tag: '5 HOURS', isGold: true, price: '₦2,000', dur: 'Best Value (Save ₦500)', badge: '65W POWER' },
+    { tag: '10 HOURS', isGold: true, price: '₦3,500', dur: 'All-Nighter (Save ₦1,500)', badge: 'MAX BATTERY' },
+    { tag: 'AVAILABLE', isGold: false, price: 'PICKUP', dur: 'Instant Campus Handover', badge: '100% READY' },
+    { tag: 'RETURNING SOON', isGold: true, price: 'RESERVE', dur: 'Queue On WhatsApp', badge: 'SLOT SAVER' },
+    { tag: 'POWER READY', isGold: false, price: '20,000mAh', dur: 'Charges Phones 4-5x', badge: 'TYPE-C PD' },
+    { tag: 'BOOK ON WHATSAPP', isGold: false, price: 'NO STORE WAIT', dur: 'Direct Chat Booking', badge: 'ZERO FRICTION' },
+    { tag: 'HOSTEL POWER', isGold: true, price: 'AFFORDABLE', dur: 'Exam & Lecture Prep', badge: 'ALWAYS LIT' },
+    { tag: 'CHARGE. RENT. GO.', isGold: false, price: 'LEGACY', dur: 'Drop Off When Done', badge: 'STUDENT FIRST' }
+  ];
+
+  const cardElements = [];
+
+  for (let i = 0; i < TOTAL_CARDS; i++) {
+    const data = cardVariants[i % cardVariants.length];
+    const el = document.createElement('div');
+    el.className = 'ring-card';
+    el.setAttribute('aria-hidden', 'true');
+    el.innerHTML = `
+      <div class="rc-tag ${data.isGold ? 'gold' : ''}">
+        <span class="rc-tag-dot"></span>
+        ${data.tag}
+      </div>
+      <div class="rc-mockup-graphic">
+        <div class="rc-mockup-body">
+          <div style="font-size:7px;font-weight:800;color:#6b88a8;letter-spacing:0.08em;">LEGACY</div>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="${data.isGold ? '#d4af37' : '#00d2ff'}">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+          <div style="font-size:7px;font-weight:700;color:${data.isGold ? '#d4af37' : '#00d2ff'};background:rgba(255,255,255,0.06);padding:2px 4px;border-radius:3px;">
+            ${data.badge}
+          </div>
+        </div>
+      </div>
+      <div class="rc-bottom">
+        <div class="rc-price ${data.isGold ? 'gold-accent' : ''}">${data.price}</div>
+        <div class="rc-duration">${data.dur}</div>
+      </div>
+    `;
+    ringStage.appendChild(el);
+    cardElements.push(el);
+  }
+
+  function renderRing(now) {
+    let dt = (now - lastTime) / 1000;
+    lastTime = now;
+    if (dt > 0.1) dt = 0.1;
+
+    if (!prefersReducedMotion && document.visibilityState === 'visible') {
+      phase -= ROT_SPEED * dt;
+    }
+
+    for (let i = 0; i < TOTAL_CARDS; i++) {
+      const a = ((i * STEP + phase) % 360 + 540) % 360 - 180;
+      const card = cardElements[i];
+
+      if (Math.abs(a) > CULL_ANGLE) {
+        card.style.display = 'none';
+        continue;
+      }
+
+      card.style.display = 'flex';
+      const r = a * (Math.PI / 180);
+      const c = Math.cos(r);
+
+      const tx = (R * Math.sin(r)).toFixed(2);
+      const tz = (R * (1 - c)).toFixed(2);
+      const rotY = (-a).toFixed(2);
+      const brightness = Math.max(0.6, (0.84 + 0.5 * (1 / c - 1))).toFixed(3);
+
+      card.style.transform = `translate3d(${tx}px, 0, ${tz}px) rotateY(${rotY}deg)`;
+      card.style.filter = `brightness(${brightness})`;
+    }
+
+    requestAnimationFrame(renderRing);
+  }
+
+  requestAnimationFrame((now) => {
+    lastTime = now;
+    renderRing(now);
+  });
+
+  /* --------------------------------------------------------------------------
+     4. RENTAL PRICING LOGIC & DYNAMIC WHATSAPP MESSAGING
+     -------------------------------------------------------------------------- */
+  const PRICING_TIERS = [
+    { hours: 1, price: 500, orig: 500, rate: 500 },
+    { hours: 2, price: 1000, orig: 1000, rate: 500 },
+    { hours: 3, price: 1500, orig: 1500, rate: 500 },
+    { hours: 4, price: 1800, orig: 2000, rate: 450 },
+    { hours: 5, price: 2000, orig: 2500, rate: 400 },
+    { hours: 6, price: 2300, orig: 3000, rate: 383 },
+    { hours: 7, price: 2600, orig: 3500, rate: 371 },
+    { hours: 8, price: 2900, orig: 4000, rate: 363 },
+    { hours: 9, price: 3200, orig: 4500, rate: 355 },
+    { hours: 10, price: 3500, orig: 5000, rate: 350 }
+  ];
+
+  let selectedIndex = 4; // 5 hours default
+
+  const durationGrid = document.getElementById('durationGrid');
+  const calcSummaryLabel = document.getElementById('calcSummaryLabel');
+  const calcPriceDisplay = document.getElementById('calcPriceDisplay');
+  const calcOrigDisplay = document.getElementById('calcOrigDisplay');
+  const calcSavingsBadge = document.getElementById('calcSavingsBadge');
+  const dynamicWaBtn = document.getElementById('dynamicWaBtn');
+
+  function renderDurationButtons() {
+    durationGrid.innerHTML = '';
+    PRICING_TIERS.forEach((tier, index) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = `duration-btn ${index === selectedIndex ? 'active' : ''}`;
+      
+      const savings = tier.orig - tier.price;
+      const saveTag = savings > 0 ? `<span class="dur-save-tag">-₦${savings}</span>` : '';
+
+      btn.innerHTML = `
+        ${saveTag}
+        <div class="dur-hours">${tier.hours} ${tier.hours === 1 ? 'Hour' : 'Hours'}</div>
+        <div class="dur-price">₦${tier.price.toLocaleString()}</div>
+      `;
+
+      btn.addEventListener('click', () => {
+        selectedIndex = index;
+        updatePricingView();
+      });
+
+      durationGrid.appendChild(btn);
+    });
+  }
+
+  function updatePricingView() {
+    const tier = PRICING_TIERS[selectedIndex];
+    const savings = tier.orig - tier.price;
+
+    const buttons = durationGrid.querySelectorAll('.duration-btn');
+    buttons.forEach((btn, idx) => {
+      btn.classList.toggle('active', idx === selectedIndex);
+    });
+
+    calcSummaryLabel.textContent = `Selected: ${tier.hours} ${tier.hours === 1 ? 'Hour' : 'Hours'} Rental Package`;
+    calcPriceDisplay.textContent = `₦${tier.price.toLocaleString()}`;
+
+    if (savings > 0) {
+      calcOrigDisplay.style.display = 'inline';
+      calcOrigDisplay.textContent = `₦${tier.orig.toLocaleString()}`;
+      calcSavingsBadge.style.display = 'inline-block';
+      calcSavingsBadge.textContent = `Save ₦${savings.toLocaleString()} (₦${tier.rate}/hr)`;
+    } else {
+      calcOrigDisplay.style.display = 'none';
+      calcSavingsBadge.style.display = 'inline-block';
+      calcSavingsBadge.textContent = `Base: ₦${tier.rate}/hr`;
+    }
+
+    // Dynamic WhatsApp Booking URL with exact prompt format
+    const waMessage = `Hi Legacy Charge, I want to rent a power bank for ${tier.hours} hours at ₦${tier.price.toLocaleString()}. Please confirm availability.`;
+    const waUrl = `https://wa.me/2347079358543?text=${encodeURIComponent(waMessage)}`;
+    dynamicWaBtn.href = waUrl;
+  }
+
+  renderDurationButtons();
+  updatePricingView();
+
+  /* --------------------------------------------------------------------------
+     5. CENTRALIZED DEMO INVENTORY & COUNTDOWN ENGINE
+     -------------------------------------------------------------------------- */
+  const inventoryData = [
+    { id: 'LC-07', status: 'available', remainingMins: 0 },
+    { id: 'LC-12', status: 'available', remainingMins: 0 },
+    { id: 'LC-18', status: 'available', remainingMins: 0 },
+    { id: 'LC-21', status: 'available', remainingMins: 0 },
+    { id: 'LC-05', status: 'returning', remainingMins: 10 },
+    { id: 'LC-11', status: 'returning', remainingMins: 22 },
+    { id: 'LC-14', status: 'rented', remainingMins: 48 },
+    { id: 'LC-03', status: 'rented', remainingMins: 102 },
+    { id: 'LC-08', status: 'rented', remainingMins: 138 },
+    { id: 'LC-19', status: 'rented', remainingMins: 186 }
+  ];
+
+  const metricAvail = document.getElementById('metricAvail');
+  const metricRented = document.getElementById('metricRented');
+  const metricSoon = document.getElementById('metricSoon');
+  const availableFleetList = document.getElementById('availableFleetList');
+  const circulatingFleetList = document.getElementById('circulatingFleetList');
+  const availHeaderCount = document.getElementById('availHeaderCount');
+  const circHeaderCount = document.getElementById('circHeaderCount');
+
+  function formatTime(mins) {
+    if (mins <= 0) return 'Ready Now';
+    if (mins <= 30) return `${mins}m remaining`;
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    return `${h}h ${m < 10 ? '0' : ''}${m}m remaining`;
+  }
+
+  function renderFleet() {
+    let avail = 0;
+    let rented = 0;
+    let soon = 0;
+
+    availableFleetList.innerHTML = '';
+    circulatingFleetList.innerHTML = '';
+
+    inventoryData.forEach(item => {
+      if (item.status === 'available') {
+        avail++;
+        const row = document.createElement('div');
+        row.className = 'fleet-item';
+        row.innerHTML = `
+          <div class="fleet-item-info">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#00d2ff">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+            <div>
+              <div class="fleet-item-id">${item.id}</div>
+              <div class="fleet-item-sub">100% Charge • Fast PD</div>
+            </div>
+          </div>
+          <span class="fleet-item-status avail">Available now</span>
+        `;
+        availableFleetList.appendChild(row);
+      } else {
+        if (item.status === 'returning') soon++;
+        if (item.status === 'rented') rented++;
+
+        const isSoon = item.status === 'returning';
+        const row = document.createElement('div');
+        row.className = 'fleet-item';
+        row.innerHTML = `
+          <div class="fleet-item-info">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="${isSoon ? '#d4af37' : '#a78bfa'}" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <div>
+              <div class="fleet-item-id">${item.id}</div>
+              <div class="fleet-item-sub">${formatTime(item.remainingMins)}</div>
+            </div>
+          </div>
+          <span class="fleet-item-status ${isSoon ? 'soon' : 'rented'}">
+            ${isSoon ? 'Returning soon' : 'Rented'}
+          </span>
+        `;
+        circulatingFleetList.appendChild(row);
+      }
+    });
+
+    metricAvail.textContent = avail;
+    metricRented.textContent = rented;
+    metricSoon.textContent = soon;
+
+    availHeaderCount.textContent = `${avail} Online`;
+    circHeaderCount.textContent = `${rented + soon} In Use`;
+  }
+
+  // Realistic countdown decrements demo remaining minutes
+  setInterval(() => {
+    inventoryData.forEach(item => {
+      if (item.status !== 'available') {
+        item.remainingMins -= 1;
+        if (item.remainingMins <= 0) {
+          item.status = 'available';
+          item.remainingMins = 0;
+        } else if (item.remainingMins <= 30) {
+          item.status = 'returning';
+        }
+      }
+    });
+    renderFleet();
+  }, 10000);
+
+  renderFleet();
+
+  /* --------------------------------------------------------------------------
+     6. BURGER MENU TOGGLE
+     -------------------------------------------------------------------------- */
+  const burgerToggle = document.getElementById('burgerToggle');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+
+  if (burgerToggle && mobileDrawer) {
+    burgerToggle.addEventListener('click', () => {
+      const isOpen = mobileDrawer.classList.toggle('open');
+      burgerToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    mobileDrawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileDrawer.classList.remove('open');
+        burgerToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     7. UNIFIED EVENT LISTENERS & RESIZE MANAGEMENT
+     -------------------------------------------------------------------------- */
+  window.addEventListener('resize', () => {
+    updateScale();
+    generateStarfield();
+  });
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', updateScale);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    lastTime = performance.now();
+  });
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(updateScale);
+  }
+
+  setTimeout(updateScale, 400);
+  setTimeout(updateScale, 1400);
+  generateStarfield();
+  updateScale();
+
+})();
+</script>
+</body>
+</html>
